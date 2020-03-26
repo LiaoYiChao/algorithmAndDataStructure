@@ -25,7 +25,7 @@ package liao.study.algorithmDataStructure.one;
 public class AlgorithmSummarize {
 
     public static void main(String[] args) {
-        int hailStone = hailStone(5);
+        int hailStone = hailStone(42);
         System.out.println(hailStone);
     }
 
@@ -40,12 +40,9 @@ public class AlgorithmSummarize {
         //最终值
         int a = 1;
 
-        while (n < 0) {
-            if (n % 2 == 0) {
-                n = n / 2;
-            }else {
-                n = n * 3 + 1;
-            }
+        while (n > 1) {
+            n = n % 2  != 0 ? n * 3 + 1 : n / 2;
+            System.out.println(n % 2 != 0 ? "奇数:" + n : "偶数:" + n);
             count++;
         }
 
