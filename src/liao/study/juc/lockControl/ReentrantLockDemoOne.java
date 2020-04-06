@@ -1,4 +1,4 @@
-package liao.study.juc;
+package liao.study.juc.lockControl;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
