@@ -78,7 +78,17 @@ import java.util.concurrent.*;
  *              具体有两种情况，可参考下方链接.
  *      解决方案：
  *          1：设置拒绝策略
+ *              JDK自带四种拒绝策略，默认使用 AbortPolicy
+ *                  1：new ThreadPoolExecutor.AbortPolicy() (默认)
+ *                      直接抛出异常策略(当线程达到设置的最大值时，超出即里面抛出异常，停止操作)
+ *                  2：new ThreadPoolExecutor.CallerRunsPolicy()
+ *                      该策略不会抛弃任务，也不会抛出异常，而是将任务回退到调用者。(即从哪来回哪去)
+ *                  3：new ThreadPoolExecutor.DiscardOldestPolicy()
+ *                      抛弃队列中等待最久的任务，然后把当前任务加入队列中尝试再次提交当前任务。
+ *                  4：new ThreadPoolExecutor.DiscardOldestPolicy()
+ *                      直接丢弃无法处理的任务，不予任何处理也不抛出异常。(如可以允许任务丢失，该策略最佳)
  *          2：可参考 - https://blog.csdn.net/findmyself_for_world/article/details/49780587
+ *          3：catch 抓捕错误，并进行对应操作。
  *
  * @author: Liao
  * @date  2020/4/6 21:53
@@ -88,7 +98,9 @@ public class ThreadPoolExecutorDemo {
     public static void main(String[] args) {
 
         ThreadPoolExecutor threadPoolExecutor =
-                new ThreadPoolExecutor(1, 2, 1L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(3));
+                new ThreadPoolExecutor(1, 2, 1L,
+                        TimeUnit.SECONDS, new ArrayBlockingQueue<>(3),
+                        new ThreadPoolExecutor.DiscardOldestPolicy());
 
         try {
             for (int i = 0; i < 10; i++) {
