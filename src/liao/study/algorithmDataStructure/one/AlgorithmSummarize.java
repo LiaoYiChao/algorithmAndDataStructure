@@ -1,7 +1,7 @@
 package liao.study.algorithmDataStructure.one;
 
 /*
- * @description:
+ * @description: 基于哔哩哔哩 - 小甲鱼算法视频学习
  *  何为算法：
  *      概述：1：借助某种工具，遵照一定规则，以明确而机械的形式进行。
  *           2：算法，即特定计算模型下，旨在解决特定问题的指令序列。
